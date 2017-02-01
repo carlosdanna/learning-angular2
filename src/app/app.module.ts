@@ -15,8 +15,12 @@ import { CommitsComponent } from './commits/commits.component';
 
 const appRoutes: Routes = [
   {path: '', component: HomeComponent},
-  {path: 'repositories', component: RepositoriesComponent}
-
+  {path: 'repositories', component: RepositoriesComponent},
+  {path: 'repositories/:repo', component: RepositoriesComponent,
+    children:[
+      {path: '', component: CommitsComponent}
+    ]
+  }
 ]
 
 @NgModule({

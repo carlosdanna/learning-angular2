@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import {GithubService} from '../github.service';
+import { Router } from '@angular/router';
+import { GithubService } from '../github.service';
+
 
 @Component({
   selector: 'app-repositories',
@@ -8,15 +10,21 @@ import {GithubService} from '../github.service';
 })
 export class RepositoriesComponent implements OnInit {
 
-  repos: any 
-  constructor(githubService: GithubService) { 
+  repos: any;
+  route : Router;
+  constructor(githubService: GithubService, router: Router) {
+    this.route = router;
     githubService.getRepos()
       .subscribe(
-        response => this.repos = response
+      response => this.repos = response
       );
 
   }
 
+  public openCommit(repo: string) {
+    
+    this.route.navigate(['/repositories', repo])
+  }
   ngOnInit() {
   }
 
